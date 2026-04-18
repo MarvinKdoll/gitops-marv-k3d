@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-production
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/MarvinKdoll/gitops-marv-k3d.git
+    targetRevision: HEAD
+    path: apps/nginx/overlays/production
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
