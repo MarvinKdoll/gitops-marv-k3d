@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rollout-demo
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: rollout-demo
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0 # never kill an old pod until new one is Ready
+      maxSurge: 1 # allow 1 extra pod above 4 during the update
+  template:
+    metadata:
+      labels:
+        app: rollout-demo
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.24
