@@ -4,3 +4,4 @@ resources:
   - rollout.yaml
   - exercise2-blue-green.yaml
   - probes.yaml
+  - hpa.yaml
